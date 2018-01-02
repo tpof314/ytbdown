@@ -1,0 +1,24 @@
+# ----------------------
+# Flask
+# ----------------------
+flask
+
+
+# ----------------------
+# Testing
+# ----------------------
+mock
+
+
+# ----------------------
+# Production Server
+# ----------------------
+gevent
+gunicorn
+
+you-get==0.4.990
+request
+requests
+
+beautifulsoup4
+bs4

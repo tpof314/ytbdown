@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+
+{% block js %}
+{% endblock %}
+
+{% block main %}
+<div class="row">
+    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+        <h3>Youtube下载器</h3>
+        <p>请把youtube视频的网址填到下面，然后点"下载"</p>
+        <p style="font-size: 11px">( YouTube、Youku、腾讯视频等都可以下载 )</p>
+        <form action="/download" method="post">
+            <input type="text" name="url" class="form-control" /><br/>
+            <center>
+                <button class="btn btn-primary" style="width:35%" type="submit">下载</button>
+            </center>
+        </form>
+    </div>
+    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+</div>
+
+<br/>
+<div class="row">
+    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+        <center>
+            <a href="/files" class="btn btn-primary" style="width:35%" type="submit">查看文件</a>
+        </center>
+        <br/>
+        <center>
+            <a href="/instruction" class="btn btn-success" style="width:35%" type="submit">使用说明</a>
+        </center>
+    </div>
+    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+</div>
+{% endblock %}

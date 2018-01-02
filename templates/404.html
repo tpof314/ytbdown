@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Page Not Found{% endblock %}
+
+{% block css %}
+<style type="text/css">
+  body{
+    padding-top: 40px;
+  }
+  h1, p{
+    text-align:center;
+  }
+  h1{
+    font-size:64px;
+    margin:75px 0 50px;
+  }
+  p{
+    font-size:24px;
+    margin:15px 0;
+  }
+</style>
+{% endblock %}
+
+{% block main %}
+<p>
+  <img src="/static/img/404.png" />
+</p>
+<p>您所访问的页面可能跑到韩国整容去了，思密达。</p>
+<p>要不～ <a href="{{ url_for('home') }}">返回首页</a> 吧?</p>
+{% endblock %}

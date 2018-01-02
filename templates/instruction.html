@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+
+{% block js %}
+{% endblock %}
+
+{% block main %}
+<div class="row">
+    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+<div id="doc" class="col-lg-10 col-md-10 col-sm-10 col-xs-10"><h1 id="使用手册">使用手册</h1><h2 id="普通下载">普通下载</h2><ol>
+<li>
+<p>在这里填入要下载的视频的网页地址</p>
+<img src="/static/img/step1.png" /><br/><br/>
+</li>
+<li>
+<p>点击“下载”按钮</p><br/>
+</li>
+<li>
+<p>按浏览器的“返回”按钮，回到主页</p>
+<img src="/static/img/step2.png" /><br/><br/>
+</li>
+<li>
+<p>按“查看文件”，并打开里面的<strong>log.txt</strong>文件，可以查看到下载进度。</p>
+<img src="/static/img/step4.png" /><br/><br/>
+</li>
+<br/>
+<br/>
+</ol><h2 id="选择不同清晰度">选择不同清晰度</h2><ol>
+<li>
+<p>在下载的链接前面加一个 <strong>-i</strong> 符号，可以查看一段视频有多少种不同的清晰度。</p>
+<img src="/static/img/2_step1.png" /><br/><br/>
+</li>
+<li>
+<p>和普通下载一样，点击“下载”按钮，然后“查看文件”。</p><br/>
+</li>
+<li>
+<p>在<strong>log.txt</strong>里面，就可以看到不同的清晰度选项。例如，这段视频有这么多种不同清晰度可以选择。</p>
+<img src="/static/img/2_step2.png" /><br/><br/>
+</li>
+<li>
+<p>如果我想选择下载 <strong>256x144</strong> 的这种，就在主页的下载地址栏上面，加上 <strong>--itag=160</strong>。<br>
+（不同网站的清晰度标签都会不太一样。youtube一般是 --itag，其他大部分网站是 --format ）</p>
+<img src="/static/img/2_step3.png" /><br/>
+</li>
+</ol>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+
+{% extends "base.html" %}
+
+
+{% block js %}
+{% endblock %}
+
+{% block main %}
+<div class="row">
+    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+        <p><p style="font-size: small">打开<b>log.txt</b>，不断刷新，可以查看下载进度</p><br/></p>
+
+        {% for filename in files %}
+            <a href="/static/downloads/{{filename}}">{{ filename }}</a><br/>
+        {% endfor %}
+        
+    </div>
+    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+</div>
+
+<br/>
+<div class="row">
+    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+        <center>
+            <a href="/" class="btn btn-primary" style="width:35%" type="submit">返回首页</a>
+        </center>
+    </div>
+    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+</div>
+{% endblock %}
