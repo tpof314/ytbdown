@@ -69,6 +69,11 @@ def check_files():
       converted_filenames.append(filename)
   return render_template('files.html', files=converted_filenames)
 
+@app.route('/delete', methods=['POST'])
+def delete():
+    filename = request.form['filename']
+    os.system('rm \"./static/downloads/' + filename + '\"')
+    return redirect('/files')
 
 ###
 # The functions below should be applicable to all Flask apps.

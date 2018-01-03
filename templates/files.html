@@ -12,7 +12,13 @@
         <p><p style="font-size: small">打开<b>log.txt</b>，不断刷新，可以查看下载进度</p><br/></p>
 
         {% for filename in files %}
-            <a href="/static/downloads/{{filename}}">{{ filename }}</a><br/>
+            <form action="/delete" method="post">
+                {% if filename != 'log.txt' %}
+                <input type="hidden" name="filename" value="{{ filename }}"></hidden>
+                <button type="submit" class="btn btn-danger btn-xs">删除</button>
+                {% endif %}
+                <a href="/static/downloads/{{filename}}" style="margin-bottom: 2px">{{ filename }}</a><br/>
+            </form>
         {% endfor %}
         
     </div>
