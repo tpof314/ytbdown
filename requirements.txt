@@ -13,7 +13,7 @@ mock
 # ----------------------
 # Production Server
 # ----------------------
-gevent
+# gevent
 gunicorn
 
 you-get==0.4.990
