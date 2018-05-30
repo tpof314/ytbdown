@@ -77,7 +77,7 @@ def delete():
 
 @app.route('/convert_mp3', methods=['POST', 'GET'])
 def convert_mp3():
-  if request.methd == 'POST':
+  if request.method == 'POST':
     filename = request.form['filename']
     fileout = filename[:-4] + ".mp3"
     os.system('./ffmpeg/ffmpeg -i \"./static/downloads/' + filename + '\" -b:a 32k ' + '\"./static/downloads/' + fileout + '\" > static/downloads/log.txt &')
