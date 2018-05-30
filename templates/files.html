@@ -11,16 +11,25 @@
     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
         <p><p style="font-size: small">打开<b>log.txt</b>，不断刷新，可以查看下载进度</p><br/></p>
 
+        <ul>
         {% for filename in files %}
-            <form action="/delete" method="post">
+            <li>
+            <form action="/delete" method="post" class="myform">
                 {% if filename != 'log.txt' %}
                 <input type="hidden" name="filename" value="{{ filename }}"></hidden>
                 <button type="submit" class="btn btn-danger btn-xs">删除</button>
                 {% endif %}
-                <a href="/static/downloads/{{filename}}" style="margin-bottom: 2px">{{ filename }}</a><br/>
             </form>
+            <form action="/convert_mp3" method="post" class="myform">
+                {% if '.mp3' not in filename and filename != 'log.txt' %}
+                <input type="hidden" name="filename" value="{{ filename }}"></hidden>
+                <button type="submit" class="btn btn-success btn-xs">转mp3</button>
+                {% endif %}
+            </form>
+            <a href="/static/downloads/{{filename}}" style="margin-bottom: 2px">{{ filename }}</a><br/>
+            </li>
         {% endfor %}
-        
+        </ul>
     </div>
     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
 </div>
@@ -35,4 +44,14 @@
     </div>
     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
 </div>
+
+<style>
+ul li {
+  list-style-type:none;
+  margin: 1px 0 0 0;
+}  
+.myform {
+  display: inline;
+}
+</style>
 {% endblock %}

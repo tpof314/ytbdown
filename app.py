@@ -75,6 +75,14 @@ def delete():
     os.system('rm \"./static/downloads/' + filename + '\"')
     return redirect('/files')
 
+@app.route('/convert_mp3', methods=['POST'])
+def convert_mp3():
+    filename = request.form['filename']
+    fileout = filename[:-4] + ".mp3"
+    #print('./ffmpeg/ffmpeg \"./static/downloads/' + filename + '\" -b:a 32k -o ' + '\"./static/downloads/' + fileout + '\"')
+    os.system('./ffmpeg/ffmpeg \"./static/downloads/' + filename + '\" -b:a 32k -o ' + '\"./static/downloads/' + fileout + '\" > static/downloads/log.txt &')
+    return "开始转换. 请在一段时间后回来查看转换好的音频. "
+
 ###
 # The functions below should be applicable to all Flask apps.
 ###
