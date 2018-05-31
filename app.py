@@ -45,11 +45,22 @@ def instruction():
     """Render the website's about page."""
     return render_template('instruction.html')
 
+
+def update_url(url):
+    if '&' in url:
+        url = url.split('&')[0]
+    if 'https://m.' in url:
+        url = url.replace('https://m.', 'https://www.')
+    elif 'http://m.' in url:
+        url = url.replace('http://m.', 'http://www.')
+    return url
+
 @app.route('/download', methods=["get", "post"])
 def download():
     if request.method == 'POST':
         # set_ffmpeg_env()
         url = request.form['url']
+        url = update_url(url)
         if "lizhi.fm" in url:
             os.system("python lizhi.py " + url + " > static/downloads/log.txt &")    
         elif "ximalaya.com" in url:
