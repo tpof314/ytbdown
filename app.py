@@ -52,6 +52,8 @@ def download():
         url = request.form['url']
         if "lizhi.fm" in url:
             os.system("python lizhi.py " + url + " > static/downloads/log.txt &")    
+        elif "ximalaya.com" in url:
+            os.system("python ximalaya.py " + url + " > static/downloads/log.txt &")    
         else:
             os.system("you-get " + url + " -o static/downloads/ > static/downloads/log.txt &")
         return "开始下载视频. 请在一段时间后回来查看已下载的视频. "
