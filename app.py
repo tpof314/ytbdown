@@ -62,9 +62,9 @@ def download():
         url = request.form['url']
         url = update_url(url)
         if "lizhi.fm" in url:
-            os.system("python lizhi.py " + url + " > static/downloads/log.txt &")    
+            os.system("python lizhi.py " + url + " > static/downloads/log.txt &")
         elif "ximalaya.com" in url:
-            os.system("python ximalaya.py " + url + " > static/downloads/log.txt &")    
+            os.system("python ximalaya.py " + url + " > static/downloads/log.txt &")
         else:
             os.system("you-get " + url + " -o static/downloads/ > static/downloads/log.txt &")
         return "开始下载视频. 请在一段时间后回来查看已下载的视频. "
@@ -93,7 +93,7 @@ def convert_mp3():
   if request.method == 'POST':
     filename = request.form['filename']
     fileout = filename[:-4] + ".mp3"
-    os.system('./ffmpeg/ffmpeg -i \"./static/downloads/' + filename + '\" -b:a 32k ' + '\"./static/downloads/' + fileout + '\" > static/downloads/log.txt &')
+    os.system('./ffmpeg/ffmpeg -i \"./static/downloads/' + filename + '\" -b:a 48k ' + '\"./static/downloads/' + fileout + '\" > static/downloads/log.txt &')
     return "开始转换. 请在一段时间后回来查看转换好的音频. "
   else:
     return redirect("/")
