@@ -55,6 +55,16 @@ def update_url(url):
         url = url.replace('http://m.', 'http://www.')
     return url
 
+def get_space():
+    df_output_lines = [s.split() for s in os.popen("df -Ph").read().splitlines()]
+    for line in df_output_lines:
+        if line[-1] == '/':
+            percent = line[-2]
+            percent = percent.replace('%', '')
+            percent = int(percent)
+            return percent
+    return 0
+
 @app.route('/download', methods=["get", "post"])
 def download():
     if request.method == 'POST':
@@ -80,7 +90,8 @@ def check_files():
       filename = filename.replace('?', '%3F')
       filename = filename.replace('#', '%23')
       converted_filenames.append(filename)
-  return render_template('files.html', files=converted_filenames)
+      percent = get_space()
+  return render_template('files.html', files=converted_filenames, percent=percent)
 
 @app.route('/delete', methods=['POST'])
 def delete():
