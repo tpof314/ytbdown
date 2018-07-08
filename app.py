@@ -67,7 +67,7 @@ def download():
             os.system("python ximalaya.py " + url + " > static/downloads/log.txt &")
         else:
             os.system("you-get " + url + " -o static/downloads/ > static/downloads/log.txt &")
-        return "开始下载视频. 请在一段时间后回来查看已下载的视频. "
+        return render_template('message.html', message="开始下载视频. 请在一段时间后回来查看已下载的视频")
     else:
         return redirect("/")
 
@@ -85,6 +85,10 @@ def check_files():
 @app.route('/delete', methods=['POST'])
 def delete():
     filename = request.form['filename']
+    filename = filename.replace('%3F', '?')
+    filename = filename.replace('%23', '#')
+    filename = filename.replace('\"', '\\\"')
+    filename = filename.replace('\'', '\\\'')
     os.system('rm \"./static/downloads/' + filename + '\"')
     return redirect('/files')
 
@@ -94,7 +98,7 @@ def convert_mp3():
     filename = request.form['filename']
     fileout = filename[:-4] + ".mp3"
     os.system('./ffmpeg/ffmpeg -i \"./static/downloads/' + filename + '\" -b:a 48k ' + '\"./static/downloads/' + fileout + '\" > static/downloads/log.txt &')
-    return "开始转换. 请在一段时间后回来查看转换好的音频. "
+    return render_template('message.html', message="开始转换. 请在一段时间后回来查看转换好的音频.")
   else:
     return redirect("/")
 
