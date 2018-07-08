@@ -26,6 +26,12 @@
                 <button type="submit" class="btn btn-success btn-xs">转mp3</button>
                 {% endif %}
             </form>
+            <form action="/play_online" method="get" class="myform">
+                {% if filename != 'log.txt' %}
+                <input type="hidden" name="filename" value="{{ filename }}"></hidden>
+                <button type="submit" class="btn btn-primary btn-xs">在线播放</button>
+                {% endif %}
+            </form>
             <a href="/static/downloads/{{filename}}" style="margin-bottom: 2px">{{ filename }}</a><br/>
             </li>
         {% endfor %}

@@ -102,6 +102,11 @@ def convert_mp3():
   else:
     return redirect("/")
 
+@app.route('/play_online', methods=['GET'])
+def play_online():
+    filename = request.args.get('filename')
+    return render_template('player.html', filename=filename)
+
 ###
 # The functions below should be applicable to all Flask apps.
 ###
