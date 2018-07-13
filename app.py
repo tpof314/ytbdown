@@ -75,7 +75,7 @@ def download():
             os.system("python lizhi.py \"" + url + "\" > static/downloads/log.txt &")
         elif "ximalaya.com" in url:
             os.system("python ximalaya.py \"" + url + "\" > static/downloads/log.txt &")
-        elif "kg.qq.com" in url:
+        elif "kg" in url and "qq.com" in url:
             os.system("python qmkge.py \"" + url + "\" > static/downloads/log.txt &")
         else:
             os.system("you-get \"" + url + "\" -o static/downloads/ > static/downloads/log.txt &")
