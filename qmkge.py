@@ -17,8 +17,13 @@ def get_audio_url(url):
 	soup = BeautifulSoup(html)
 	tags = soup.findAll('script', attrs={'type': 'text/javascript'})
 	tag  = getAudioTag(tags)
-	result_url   = re.search('http://dl.stream.kg.qq.com/.*\.m4a', tag).group(0)
-	result_title = soup.find('title').text + '.m4a'
+	result_url   = re.search('http://dl.stream.kg.qq.com/.*\.m4a', tag)
+	extension    = '.m4a'
+	if result_url == None:
+		result_url   = re.search('http://dl.stream.kg.qq.com/.*\.mp4', tag)
+		extension    = '.mp4'
+	result_url   = result_url.group(0)
+	result_title = soup.find('title').text + extension
 	return result_url, result_title
 
 """
