@@ -9,6 +9,8 @@ This file creates your application.
 import os
 import glob
 import lizhi
+from subprocess import Popen
+from random import randint
 from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
@@ -28,17 +30,20 @@ def set_ffmpeg_env():
 # Routing for your application.
 ###
 
+def get_random_ads():
+    ads = randint(0, 100)
+    return int(ads > 65)
 
 @app.route('/')
 def home():
     """Render website's home page."""
-    return render_template('home.html')
+    return render_template('home.html', ads=get_random_ads())
 
 
 @app.route('/about/')
 def about():
     """Render the website's about page."""
-    return render_template('about.html')
+    return render_template('about.html', ads=get_random_ads())
 
 @app.route('/instruction/')
 def instruction():
@@ -67,6 +72,7 @@ def get_space():
 
 @app.route('/download', methods=["get", "post"])
 def download():
+    fp = open("static/downloads/log.txt", "w")
     if request.method == 'POST':
         # set_ffmpeg_env()
         url = request.form['url']
@@ -78,8 +84,9 @@ def download():
         elif "kg" in url and "qq.com" in url:
             os.system("python qmkge.py \"" + url + "\" > static/downloads/log.txt &")
         else:
-            os.system("you-get \"" + url + "\" -o static/downloads/ > static/downloads/log.txt &")
-        return render_template('message.html', message="开始下载视频. 请在一段时间后回来查看已下载的视频")
+            #os.system("you-get \"" + url + "\" -o static/downloads/ > static/downloads/log.txt &")
+            Popen(["you-get", url, "-o", "static/downloads/"], stdout=fp)
+        return render_template('message.html', message="开始下载视频. 请在一段时间后回来查看已下载的视频", ads=get_random_ads())
     else:
         return redirect("/")
 
@@ -93,7 +100,7 @@ def check_files():
       filename = filename.replace('#', '%23')
       converted_filenames.append(filename)
       percent = get_space()
-  return render_template('files.html', files=converted_filenames, percent=percent)
+  return render_template('files.html', files=converted_filenames, percent=percent, ads=get_random_ads())
 
 @app.route('/delete', methods=['POST'])
 def delete():
@@ -102,23 +109,26 @@ def delete():
     filename = filename.replace('%23', '#')
     filename = filename.replace('\"', '\\\"')
     filename = filename.replace('\'', '\\\'')
-    os.system('rm \"./static/downloads/' + filename + '\"')
+    #os.system('rm \"./static/downloads/' + filename + '\"')
+    Popen(["rm", "./static/downloads/"+filename])
     return redirect('/files')
 
 @app.route('/convert_mp3', methods=['POST', 'GET'])
 def convert_mp3():
   if request.method == 'POST':
+    fp = open("static/downloads/log.txt", "w")
     filename = request.form['filename']
     fileout = filename[:-4] + ".mp3"
-    os.system('./ffmpeg/ffmpeg -i \"./static/downloads/' + filename + '\" -b:a 48k ' + '\"./static/downloads/' + fileout + '\" > static/downloads/log.txt &')
-    return render_template('message.html', message="开始转换. 请在一段时间后回来查看转换好的音频.")
+    #os.system('./ffmpeg/ffmpeg -i \"./static/downloads/' + filename + '\" -b:a 48k ' + '\"./static/downloads/' + fileout + '\" > static/downloads/log.txt &')
+    Popen(["./ffmpeg/ffmpeg", "-i", "./static/downloads/"+filename, "-b:a", "48k", "./static/downloads/"+fileout], stdout=fp)
+    return render_template('message.html', message="开始转换. 请在一段时间后回来查看转换好的音频.", ads=get_random_ads())
   else:
     return redirect("/")
 
 @app.route('/play_online', methods=['GET'])
 def play_online():
     filename = request.args.get('filename')
-    return render_template('player.html', filename=filename, title=filename)
+    return render_template('player.html', filename=filename, title=filename, ads=get_random_ads())
 
 ###
 # The functions below should be applicable to all Flask apps.
@@ -149,4 +159,4 @@ def page_not_found(error):
 
 
 if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0', port=8080)
+    app.run(debug=False, host='0.0.0.0', port=8081)

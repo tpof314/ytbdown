@@ -5,9 +5,24 @@
     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
         <br/>
         <b>下面是各种无良广告</b>
-         <!-- Begin BidVertiser code -->
+        {% if ads == 1 %}
+        <!-- Begin BidVertiser code -->
         <SCRIPT data-cfasync="true" SRC="//bdv.bidvertiser.com/BidVertiser.dbm?pid=671350&bid=1911036" TYPE="text/javascript"></SCRIPT>
         <!-- End BidVertiser code --> 
+        {% endif %}
+        {% if ads == 0 %}
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- Video Downloader -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-6867049816100545"
+             data-ad-slot="9208742930"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+        {% endif %}
         <br/>
     </div>
     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
