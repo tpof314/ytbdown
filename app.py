@@ -78,11 +78,14 @@ def download():
         url = request.form['url']
         url = update_url(url)
         if "lizhi.fm" in url:
-            os.system("python lizhi.py \"" + url + "\" > static/downloads/log.txt &")
+            #os.system("python lizhi.py \"" + url + "\" > static/downloads/log.txt &")
+            Popen(["python", "lizhi.py", url], stdout=fp)
         elif "ximalaya.com" in url:
-            os.system("python ximalaya.py \"" + url + "\" > static/downloads/log.txt &")
+            #os.system("python ximalaya.py \"" + url + "\" > static/downloads/log.txt &")
+            Popen(["python", "ximalaya.py", url], stdout=fp)
         elif "kg" in url and "qq.com" in url:
-            os.system("python qmkge.py \"" + url + "\" > static/downloads/log.txt &")
+            #os.system("python qmkge.py \"" + url + "\" > static/downloads/log.txt &")
+            Popen(["python", "qmkge.py", url], stdout=fp)
         else:
             #os.system("you-get \"" + url + "\" -o static/downloads/ > static/downloads/log.txt &")
             Popen(["you-get", url, "-o", "static/downloads/"], stdout=fp)
@@ -109,7 +112,6 @@ def delete():
     filename = filename.replace('%23', '#')
     filename = filename.replace('\"', '\\\"')
     filename = filename.replace('\'', '\\\'')
-    #os.system('rm \"./static/downloads/' + filename + '\"')
     Popen(["rm", "./static/downloads/"+filename])
     return redirect('/files')
 
@@ -159,4 +161,4 @@ def page_not_found(error):
 
 
 if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0', port=8080)
+    app.run(debug=False, host='0.0.0.0', port=8081)

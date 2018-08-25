@@ -1,0 +1,1 @@
+wget "http://audio.xmcdn.com/group30/M02/3F/23/wKgJXlmBkvizm61ZAGHMklsHJbM714.m4a" -O "./static/downloads/《人在江湖》郭德纲 于谦.m4a" --header="User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36"
