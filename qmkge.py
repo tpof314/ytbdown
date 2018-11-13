@@ -14,13 +14,14 @@ def getAudioTag(tags):
 def get_audio_url(url):
 	resp = requests.get(url, headers=fake_header)
 	html = resp.text
-	soup = BeautifulSoup(html)
+	print(html)
+	soup = BeautifulSoup(html, "html.parser")
 	tags = soup.findAll('script', attrs={'type': 'text/javascript'})
 	tag  = getAudioTag(tags)
-	result_url   = re.search('http://dl.stream.kg.qq.com/.*\.m4a', tag)
+	result_url   = re.search('http://[a-z][a-z].stream.kg.qq.com/.*\.m4a', tag)
 	extension    = '.m4a'
 	if result_url == None:
-		result_url   = re.search('http://dl.stream.kg.qq.com/.*\.mp4', tag)
+		result_url   = re.search('http://[a-z][a-z].stream.kg.qq.com/.*\.mp4', tag)
 		extension    = '.mp4'
 	result_url   = result_url.group(0)
 	result_title = soup.find('title').text + extension
