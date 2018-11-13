@@ -16,7 +16,7 @@ mock
 # gevent
 gunicorn
 
-you-get==0.4.990
+you-get
 request
 requests
 
