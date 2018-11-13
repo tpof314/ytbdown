@@ -14,7 +14,6 @@ def getAudioTag(tags):
 def get_audio_url(url):
 	resp = requests.get(url, headers=fake_header)
 	html = resp.text
-	print(html)
 	soup = BeautifulSoup(html, "html.parser")
 	tags = soup.findAll('script', attrs={'type': 'text/javascript'})
 	tag  = getAudioTag(tags)
