@@ -32,7 +32,7 @@ def set_ffmpeg_env():
 
 def get_random_ads():
     ads = randint(0, 100)
-    return int(ads > 65)
+    return int(ads > 45)
 
 @app.route('/')
 def home():
